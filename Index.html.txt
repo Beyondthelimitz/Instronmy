@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        input {
+            width: 80%;
+            max-width: 400px;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #searchResults {
+            margin-top: 20px;
+            padding: 20px;
+        }
+        .result {
+            background: white;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .result img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Search for Any Topic</h1>
+    <input type="text" id="searchBox" placeholder="Type a topic..." onkeyup="searchTopic()">
+
+    <div id="searchResults"></div>
+
+    <script>
+        // Sample data (You can add more topics)
+        const knowledgeBase = {
+            "Football": {
+                description: "Football is a popular sport played with a ball and two teams of 11 players. The objective is to score goals.",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Football_iu_1996.jpg/800px-Football_iu_1996.jpg"
+            },
+            "Shooting": {
+                description: "Shooting is a sport that involves hitting a target using a firearm or an air rifle with precision.",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Shooting_sport_pictogram.svg/512px-Shooting_sport_pictogram.svg.png"
+            },
+            "Phonk Music": {
+                description: "Phonk is a subgenre of hip-hop music inspired by 90s Memphis rap, featuring heavy bass and retro vibes.",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Vinyl_record.svg/512px-Vinyl_record.svg.png"
+            }
+        };
+
+        function searchTopic() {
+            let query = document.getElementById("searchBox").value.trim().toLowerCase();
+            let resultsDiv = document.getElementById("searchResults");
+            resultsDiv.innerHTML = "";
+
+            for (let topic in knowledgeBase) {
+                if (topic.toLowerCase().includes(query) && query !== "") {
+                    let resultHTML = `
+                        <div class="result">
+                            <h2>${topic}</h2>
+                            <p>${knowledgeBase[topic].description}</p>
+                            <img src="${knowledgeBase[topic].image}" alt="${topic}">
+                        </div>
+                    `;
+                    resultsDiv.innerHTML += resultHTML;
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
